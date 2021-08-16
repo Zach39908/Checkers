@@ -67,23 +67,19 @@ void gameBoard::changeBox(int r, int c, char value) {
             throw inputExc("Error: Row out of range.");
         else if(c > 8 || c < 1)
             throw inputExc("Error: Column out of range.");
-
-        if(value == 'x' || value == 'X') {
+        
+        if(value != 'x', value != 'X', value != 'o', value != 'O', value != 'q', value != 'Q')
+            throw inputExc("Error: Invalid box value (must be 'x', 'X', 'o', 'O', 'q', or 'Q').")
+        else {
             for(int i = 1; i < ROW_AMOUNT - 1; i++) {
                 board[indexR][i].erase(rangeC, 14);
-                board[indexR][i].insert(rangeC, xBox[i]);
-            }
-        }
-        else if(value == 'o' || value == 'O') {
-            for(int i = 1; i < ROW_AMOUNT - 1; i++) {
-                board[indexR][i].erase(rangeC, 14);
-                board[indexR][i].insert(rangeC, oBox[i]);
-            }
-        }
-        else if(value == 'q' || value == 'Q') {
-            for(int i = 1; i < ROW_AMOUNT - 1; i++) {
-                board[indexR][i].erase(rangeC, 14);
-                board[indexR][i].insert(rangeC, qBox[i]);
+                
+                if(value == 'x' || value == 'X')
+                    board[indexR][i].insert(rangeC, xBox[i]);
+                else if(value == 'o' || value == 'O')
+                    board[indexR][i].insert(rangeC, oBox[i]);
+                else if(value == 'q' || value == 'Q')
+                    board[indexR][i].insert(rangeC, qBox[i]);
             }
         }
     }
@@ -93,22 +89,21 @@ void gameBoard::changeBox(int r, int c, char value) {
 }
 
 void gameBoard::defaultBoard() {
-    for(int i = 1; i < ROWS + 1; i++) {
-        if(i == 1 || i == 2 || i == 3) {
-            for(int j = 2; j < COLS + 1; j += 2) {
-                if(i == 2)
-                    changeBox(i, j - 1, 'x');
-                else
-                    changeBox(i, j, 'x');
-            }
+    for(int i = 1; i < ROWS - 4; i++) {
+        for(int j = 2; j < COLS + 1; j += 2) {
+            if(i == 2)
+                changeBox(i, j - 1, 'x');
+            else
+                changeBox(i, j, 'x');
         }
-        else if(i == 6 || i == 7 || i == 8) {
-            for(int j = 1; j < COLS + 1; j += 2) {
-                if(i == 7)
-                    changeBox(i, j + 1, 'o');
-                else
-                    changeBox(i, j, 'o');
-            }
+    }
+    
+    for(int i = ROWS - 2; i < ROWS + 1; i++) {
+        for(int j = 1; j < COLS + 1; j += 2) {
+            if(i == 7)
+                changeBox(i, j + 1, 'o');
+            else
+                changeBox(i, j, 'o');
         }
     }
 }
