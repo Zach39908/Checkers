@@ -68,19 +68,17 @@ void gameBoard::changeBox(int r, int c, char value) {
         else if(c > 8 || c < 1)
             throw inputExc("Error: Column out of range.");
         
-        if(value != 'x', value != 'X', value != 'o', value != 'O', value != 'q', value != 'Q')
-            throw inputExc("Error: Invalid box value (must be 'x', 'X', 'o', 'O', 'q', or 'Q').")
-        else {
-            for(int i = 1; i < ROW_AMOUNT - 1; i++) {
-                board[indexR][i].erase(rangeC, 14);
-                
-                if(value == 'x' || value == 'X')
-                    board[indexR][i].insert(rangeC, xBox[i]);
-                else if(value == 'o' || value == 'O')
-                    board[indexR][i].insert(rangeC, oBox[i]);
-                else if(value == 'q' || value == 'Q')
-                    board[indexR][i].insert(rangeC, qBox[i]);
-            }
+        for(int i = 1; i < ROW_AMOUNT - 1; i++) {
+            board[indexR][i].erase(rangeC, 14);
+            
+            if(value == 'x' || value == 'X')
+                board[indexR][i].insert(rangeC, xBox[i]);
+            else if(value == 'o' || value == 'O')
+                board[indexR][i].insert(rangeC, oBox[i]);
+            else if(value == 'q' || value == 'Q')
+                board[indexR][i].insert(rangeC, qBox[i]);
+            else
+                throw inputExc("Error: Incorrect box value.");
         }
     }
     catch(inputExc error) {
