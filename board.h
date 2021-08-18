@@ -15,6 +15,6 @@ class gameBoard {
 public:                                     // Hierarchy = board -> boardRow -> row#
     gameBoard();
     void displayBoard();
-    void changeBox(int, int, char);
+    void changeBox(int, int, string);
     void defaultBoard();
 };

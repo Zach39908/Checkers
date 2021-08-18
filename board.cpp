@@ -63,11 +63,42 @@ gameBoard::gameBoard() {
     for(int j = 0; j < ROWS; j++) {
         board.push_back(boardRow);      // Adding 8 full "boardRow" vectors to the "board" 2D vector.
     }
+
+    defaultBoard();
+}
+
+void gameBoard::defaultBoard() {
+    for(int i = 1; i < ROWS - 4; i++) { // The top 3 rows of the default board are filled with 'X' pieces as the AI's pieces.
+        for(int j = 2; j < COLS + 1; j += 2) {
+            if(i == 2)
+                changeBox(i, j - 1, "x");
+            else
+                changeBox(i, j, "x");
+        }
+    }
+
+    for(int i = ROWS - 2; i < ROWS + 1; i++) {  // Bottom 3 rows of the default board are filled with 'O' pieces as the player's pieces.
+        for(int j = 1; j < COLS + 1; j += 2) {
+            if(i == 7)
+                changeBox(i, j + 1, "o");
+            else
+                changeBox(i, j, "o");
+        }
+    }
+
+    for(int i = 1; i < ROWS + 1; i++) {
+        for(int j = 1; j < COLS + 1; j += 2) {      // Changing all unoccupied boxes to filled-in color boxes.
+            if(i % 2 != 0)
+                changeBox(i, j, "c");
+            else
+                changeBox(i, j + 1, "c");
+        }
+    }
 }
 
 void gameBoard::displayBoard() {
-        for(int i = 0; i < board.size(); i++) {
-            for(int j = 0; j < boardRow.size(); j++) {
+        for(unsigned int i = 0; i < board.size(); i++) {
+            for(unsigned int j = 0; j < boardRow.size(); j++) {
                 cout << board[i][j] << endl;        // Displaying each "boardRow" vector in the "board" followed by an endl.
             }
         }
@@ -75,7 +106,7 @@ void gameBoard::displayBoard() {
         cout << endl << ".............." << endl << endl;;
     }
 
-void gameBoard::changeBox(int r, int c, char value) {   // r = selected row, c = selected column, value = type of box to change to
+void gameBoard::changeBox(int r, int c, string value) {   // r = selected row, c = selected column, value = type of box to change to
     int rangeC = (c-1) * (BOX_WIDTH), indexR = (r-1);
 
     try {
@@ -84,59 +115,36 @@ void gameBoard::changeBox(int r, int c, char value) {   // r = selected row, c =
         else if(c > 8 || c < 1)     // If you pass a column outside of 1-8, it doesn't exist on the board.
             throw inputExc("Error: Column out of range.");
         
-        for(int i = 1; i < ROW_AMOUNT - 1; i++) {       // Looping 3 times to only fill the middle portion of each box (not the boundaries).
+        for(int i = 1; i < ROW_AMOUNT - 1; i++) {       // Looping 3 times to only fill the middles portion of each box (not the boundaries).
             board[indexR][i].erase(rangeC, 14);         // Erasing from the specified row, col parameters to the next box boundaries.
             
-            if(value == 'x' || value == 'X')
+            if(value == "x" || value == "X")
                 board[indexR][i].insert(rangeC, xBox[i]);   // Inserting each row of the newly changing box type into the position we just erased.
-            else if(value == 'o' || value == 'O')
+            else if(value == "o" || value == "O")
                 board[indexR][i].insert(rangeC, oBox[i]);
-            else if(value == 'q')
+            else if(value == "xq" || value == "XQ" || value == "Xq" || value == "xQ")
                 board[indexR][i].insert(rangeC, xqBox[i]);
-            else if(value == 'Q')
+            else if(value == "oq" || value == "OQ" || value == "Oq" || value == "oQ")
                 board[indexR][i].insert(rangeC, oqBox[i]);
-            else if(value == 'c' || value == 'C')
+            else if(value == "c" || value == "C")
                 board[indexR][i].insert(rangeC, cBox[i]);
             else
                 throw inputExc("Error: Incorrect box value.");
         }
     }
-    catch(inputExc error) {
+    catch(inputExc &error) {
         cout << error.what() << endl;
-    }
-}
-
-void gameBoard::defaultBoard() {
-    for(int i = 1; i < ROWS - 4; i++) { // The top 3 rows of the default board are filled with 'X' pieces as the AI's pieces.
-        for(int j = 2; j < COLS + 1; j += 2) {
-            if(i == 2)
-                changeBox(i, j - 1, 'x');
-            else
-                changeBox(i, j, 'x');
-        }
-    }
-    
-    for(int i = ROWS - 2; i < ROWS + 1; i++) {  // Bottom 3 rows of the default board are filled with 'O' pieces as the player's pieces.
-        for(int j = 1; j < COLS + 1; j += 2) {
-            if(i == 7)
-                changeBox(i, j + 1, 'o');
-            else
-                changeBox(i, j, 'o');
-        }
-    }
-
-    for(int i = 1; i < ROWS + 1; i++) {
-        for(int j = 1; j < COLS + 1; j += 2) {      // Changing all unoccupied boxes to filled-in color boxes.
-            if(i % 2 != 0)
-                changeBox(i, j, 'c');
-            else
-                changeBox(i, j + 1, 'c');
-        }
     }
 }
 
 int main() {            // Test main() function.
     gameBoard g1;
+    g1.displayBoard();
+    g1.changeBox(1,1,"xq");
+    g1.changeBox(1,3,"xq");
+    g1.changeBox(1,5,"xq");
+    g1.changeBox(1,7,"xq");
+    g1.displayBoard();
     g1.defaultBoard();
     g1.displayBoard();
 }
