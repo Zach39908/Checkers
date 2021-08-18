@@ -4,10 +4,11 @@
  using namespace std;
 
 class gameMenu {
-    string Options[5];
-    char Select[10];
+    vector<string> Options;
+    int Select[5];
 public:
     gameMenu();
     void Interface();
+    void title();
     bool inputCheck(string);
 };
