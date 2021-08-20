@@ -61,7 +61,6 @@ bool gameMenu::inputCheck(int entry) {
     return false;
 }
 
-int main() {
-    gameMenu g1;
-    cout << g1.Interface() << endl;
+void gameMenu::saveGame() {
+
 }

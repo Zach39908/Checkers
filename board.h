@@ -1,7 +1,9 @@
+#ifndef H_BOARD
+#define H_BOARD
+
 #include <iostream>
 #include <string>
 #include <vector>
-
 #include "exception.h"
 
 using namespace std;
@@ -18,3 +20,5 @@ public:                                     // Hierarchy = board -> boardRow -> 
     void changeBox(int, int, string);
     void defaultBoard();
 };
+
+#endif

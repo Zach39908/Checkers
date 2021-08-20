@@ -136,15 +136,3 @@ void gameBoard::changeBox(int r, int c, string value) {   // r = selected row, c
         cout << error.what() << endl;
     }
 }
-
-int main() {            // Test main() function.
-    gameBoard g1;
-    g1.displayBoard();
-    g1.changeBox(1,1,"xq");
-    g1.changeBox(1,3,"xq");
-    g1.changeBox(1,5,"xq");
-    g1.changeBox(1,7,"xq");
-    g1.displayBoard();
-    g1.defaultBoard();
-    g1.displayBoard();
-}
