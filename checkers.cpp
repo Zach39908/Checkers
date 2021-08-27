@@ -1,1 +1,0 @@
-#include "checkers.h"
