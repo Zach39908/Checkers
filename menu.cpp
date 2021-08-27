@@ -101,4 +101,7 @@ void gameMenu::saveGame(gameBoard activeBoard) {
             }
         }
     }
+
+    writeFile.close();
+    readFile.close();
 }
