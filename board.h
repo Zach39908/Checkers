@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+
 #include "exception.h"
 
 using namespace std;
@@ -19,6 +21,9 @@ public:                                     // Hierarchy = board -> boardRow -> 
     void displayBoard();
     void changeBox(int, int, string);
     void defaultBoard();
+    void writeToFile(ofstream&);
+
+    friend class gamePlay;
 };
 
 #endif

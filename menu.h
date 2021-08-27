@@ -1,8 +1,7 @@
 #ifndef H_MENU
 #define H_MENU
 
-#include <fstream>
-#include "board.h"
+#include "player.h"
  
  using namespace std;
 
@@ -18,7 +17,7 @@ public:
     int Interface();
     void title();
     bool inputCheck(int);
-    void saveGame();
+    void saveGame(gameBoard);
 };
 
 #endif

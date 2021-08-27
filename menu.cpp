@@ -61,6 +61,44 @@ bool gameMenu::inputCheck(int entry) {
     return false;
 }
 
-void gameMenu::saveGame() {
+void gameMenu::saveGame(gameBoard activeBoard) {
+    ofstream writeFile;
+    ifstream readFile;
+    string choice;
+    bool valid = false;
 
+    readFile.open("save.txt");
+
+    if(!readFile.good()) {
+        cout << "Creating Game Save File..." << endl;
+        writeFile.open("save.txt", ios_base::trunc);
+        activeBoard.writeToFile(writeFile);
+        cout << "Game Saved in \"save.txt\"" << endl;
+    }
+    else {
+        while(valid == false) {
+            try {
+                cout << "This will overwrite the previous save. Are you sure you want to continue? (\"yes\" or \"no\"): "; cin >> choice;
+
+                if(choice == "yes" || choice == "Yes" || choice == "YES") {
+                    writeFile.open("save.txt", ios_base::trunc);
+                    activeBoard.writeToFile(writeFile);
+                    cout << "Game Save Overwritten in \"save.txt\"" << endl;
+                    valid = true;
+                }
+                else if(choice == "no" || choice == "No" || choice == "NO") {
+                    cout << "Returning to Main Menu..." << endl;
+                    valid = true;
+                    return;
+                }
+                else
+                    throw inputExc("Error: Invalid Choice.");
+            }
+            catch(inputExc &error) {
+                cout << error.what() << endl;
+                cout << "Try Again." << endl;
+                valid = false;
+            }
+        }
+    }
 }

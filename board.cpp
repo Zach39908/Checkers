@@ -136,3 +136,14 @@ void gameBoard::changeBox(int r, int c, string value) {   // r = selected row, c
         cout << error.what() << endl;
     }
 }
+
+void gameBoard::writeToFile(ofstream &outFile) {
+    for(unsigned int i = 0; i < board.size(); i++) {
+        for(unsigned int j = 0; j < boardRow.size(); j++) {
+            if(i + 1 == board.size() && j + 1 == boardRow.size())
+                outFile << board[i][j];
+            else
+                outFile << board[i][j] << endl;
+        }
+    }
+}
