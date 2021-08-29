@@ -115,7 +115,7 @@ void gameBoard::changeBox(int r, int c, string value) {   // r = selected row, c
         else if(c > 8 || c < 1)     // If you pass a column outside of 1-8, it doesn't exist on the board.
             throw inputExc("Error: Column out of range.");
         
-        for(int i = 1; i < ROW_AMOUNT - 1; i++) {       // Looping 3 times to only fill the middles portion of each box (not the boundaries).
+        for(int i = 1; i < ROW_AMOUNT - 1; i++) {       // Looping 3 times to only fill the middle portion of each box (not the boundaries).
             board[indexR][i].erase(rangeC, 14);         // Erasing from the specified row, col parameters to the next box boundaries.
             
             if(value == "x" || value == "X")
@@ -141,7 +141,7 @@ void gameBoard::writeToFile(ofstream &outFile) {
     for(unsigned int i = 0; i < board.size(); i++) {
         for(unsigned int j = 0; j < boardRow.size(); j++) {
             if(i + 1 == board.size() && j + 1 == boardRow.size())
-                outFile << board[i][j];
+                outFile << board[i][j];                             // Writing each row of the board to ofstream file, on last row we exclude the endl
             else
                 outFile << board[i][j] << endl;
         }

@@ -9,7 +9,7 @@ gameMenu::gameMenu() {
     p1.Options.push_back("Personal Stats");
     p1.Options.push_back("Quit");
 
-    p1.Select[0] = 1;
+    p1.Select[0] = 1;       // Array of numbers that correspond the the user's menu choice from the vector Option
     p1.Select[1] = 2;
     p1.Select[2] = 3;
     p1.Select[3] = 4;
@@ -21,14 +21,14 @@ int gameMenu::Interface() {
 
     title();
 
-    while(!inputCheck(userEntry)) {
+    while(!inputCheck(userEntry)) {         // Validating user's entry from the Select[] array to see if it's an available choice
         for(unsigned int i = 0; i < p1.Options.size(); i++)
             cout << "(" << i + 1 << ")\t" << p1.Options[i] << "." << endl;
 
         cout << endl << "Enter an option (number): "; cin >> userEntry;
         cout << endl;
 
-        if(isdigit(userEntry) == 0) {
+        if(isdigit(userEntry) == 0) {       // if user did not enter a digit, the input stream is cleared and reset
             cin.clear();
             cin.ignore(1000, '\n');
         }
@@ -39,7 +39,7 @@ int gameMenu::Interface() {
 
 void gameMenu::title() {
     cout << endl;
-    cout << "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOS" << endl;
+    cout << "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO" << endl;
     cout << "X                                                                                  O" << endl;
     cout << "X      /`````  |     |   |`````    /`````   |   /   |`````   |```\\    /```   |     O" << endl;
     cout << "X     /        |     |   |        /         | /`    |        |   /   /       |     O" << endl;
@@ -54,14 +54,14 @@ void gameMenu::title() {
 
 bool gameMenu::inputCheck(int entry) {
     for(unsigned int i = 0; i < p1.Options.size(); i++) {
-        if(entry == p1.Select[i])
+        if(entry == p1.Select[i])                           // If the parameter is found within the Select[] array, return true, otherwise, return false
             return true;
     }
 
     return false;
 }
 
-void gameMenu::saveGame(gameBoard activeBoard) {
+void gameMenu::saveGame(gameBoard activeBoard) {            // Activates save game functionality
     ofstream writeFile;
     ifstream readFile;
     string choice;
@@ -69,26 +69,26 @@ void gameMenu::saveGame(gameBoard activeBoard) {
 
     readFile.open("save.txt");
 
-    if(!readFile.good()) {
+    if(!readFile.good()) {                                  // If a save file doesn't exist currently, we create one.
         cout << "Creating Game Save File..." << endl;
         writeFile.open("save.txt", ios_base::trunc);
         activeBoard.writeToFile(writeFile);
-        cout << "Game Saved in \"save.txt\"" << endl;
+        cout << "Game Saved in \"save.txt\"" << endl << endl;
     }
     else {
         while(valid == false) {
             try {
-                cout << "This will overwrite the previous save. Are you sure you want to continue? (\"yes\" or \"no\"): "; cin >> choice;
+                cout << "This will overwrite the previous save. Are you sure you want to continue? (\"yes\" or \"no\"): "; cin >> choice;   // User can only have one saved game at a time
+                cout << endl;
 
                 if(choice == "yes" || choice == "Yes" || choice == "YES") {
-                    writeFile.open("save.txt", ios_base::trunc);
+                    writeFile.open("save.txt", ios_base::trunc);                // Writing new game content to save file, this file truncates each time it's opened (clears all data)
                     activeBoard.writeToFile(writeFile);
-                    cout << "Game Save Overwritten in \"save.txt\"" << endl;
+                    cout << "Game Save Overwritten in \"save.txt\"" << endl << endl;
                     valid = true;
                 }
                 else if(choice == "no" || choice == "No" || choice == "NO") {
-                    cout << "Returning to Main Menu..." << endl;
-                    valid = true;
+                    cout << "Returning to Main Menu..." << endl<< endl;                // Exits save menu
                     return;
                 }
                 else
@@ -96,8 +96,7 @@ void gameMenu::saveGame(gameBoard activeBoard) {
             }
             catch(inputExc &error) {
                 cout << error.what() << endl;
-                cout << "Try Again." << endl;
-                valid = false;
+                cout << "Try Again." << endl << endl;
             }
         }
     }
