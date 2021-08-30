@@ -68,7 +68,7 @@ gameBoard::gameBoard() {
 }
 
 void gameBoard::defaultBoard() {
-    for(int i = 1; i < ROWS - 4; i++) { // The top 3 rows of the default board are filled with 'X' pieces as the AI's pieces.
+    for(int i = 1; i < ROWS - 4; i++) {             // The top 3 rows of the default board are filled with 'X' pieces as the AI's pieces.
         for(int j = 2; j < COLS + 1; j += 2) {
             if(i == 2)
                 changeBox(i, j - 1, "x");
@@ -77,7 +77,7 @@ void gameBoard::defaultBoard() {
         }
     }
 
-    for(int i = ROWS - 2; i < ROWS + 1; i++) {  // Bottom 3 rows of the default board are filled with 'O' pieces as the player's pieces.
+    for(int i = ROWS - 2; i < ROWS + 1; i++) {      // Bottom 3 rows of the default board are filled with 'O' pieces as the player's pieces.
         for(int j = 1; j < COLS + 1; j += 2) {
             if(i == 7)
                 changeBox(i, j + 1, "o");
@@ -99,7 +99,7 @@ void gameBoard::defaultBoard() {
 void gameBoard::displayBoard() {
         for(unsigned int i = 0; i < board.size(); i++) {
             for(unsigned int j = 0; j < boardRow.size(); j++) {
-                cout << board[i][j] << endl;        // Displaying each "boardRow" vector in the "board" followed by an endl.
+                cout << board[i][j] << endl;                // Displaying each "boardRow" vector in the "board" followed by an endl.
             }
         }
 
@@ -115,11 +115,11 @@ void gameBoard::changeBox(int r, int c, string value) {   // r = selected row, c
         else if(c > 8 || c < 1)     // If you pass a column outside of 1-8, it doesn't exist on the board.
             throw inputExc("Error: Column out of range.");
         
-        for(int i = 1; i < ROW_AMOUNT - 1; i++) {       // Looping 3 times to only fill the middle portion of each box (not the boundaries).
-            board[indexR][i].erase(rangeC, 14);         // Erasing from the specified row, col parameters to the next box boundaries.
+        for(int i = 1; i < ROW_AMOUNT - 1; i++) {       // Looping 3 times to only fill the middle portion of each box (not the upper/lower boundaries).
+            board[indexR][i].erase(rangeC, 14);         // Erasing from the specified (row, col) parameters to the next box boundaries.
             
             if(value == "x" || value == "X")
-                board[indexR][i].insert(rangeC, xBox[i]);   // Inserting each row of the newly changing box type into the position we just erased.
+                board[indexR][i].insert(rangeC, xBox[i]);   // Inserting each row of the new box type into the position we just erased.
             else if(value == "o" || value == "O")
                 board[indexR][i].insert(rangeC, oBox[i]);
             else if(value == "xq" || value == "XQ" || value == "Xq" || value == "xQ")
@@ -141,7 +141,7 @@ void gameBoard::writeToFile(ofstream &outFile) {
     for(unsigned int i = 0; i < board.size(); i++) {
         for(unsigned int j = 0; j < boardRow.size(); j++) {
             if(i + 1 == board.size() && j + 1 == boardRow.size())
-                outFile << board[i][j];                             // Writing each row of the board to ofstream file, on last row we exclude the endl
+                outFile << board[i][j];                             // Writing each row of the board to the ofstream file, on the last row we exclude the endl
             else
                 outFile << board[i][j] << endl;
         }

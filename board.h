@@ -23,7 +23,7 @@ public:                                     // Hierarchy = board -> boardRow -> 
     void defaultBoard();
     void writeToFile(ofstream&);
 
-    friend class gamePlay;
+    friend class player;
 };
 
 #endif
