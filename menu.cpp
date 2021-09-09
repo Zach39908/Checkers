@@ -16,10 +16,11 @@ gameMenu::gameMenu() {
     p1.Select[4] = 5;
 }
 
-int gameMenu::Interface() {
+int gameMenu::Interface(bool first) {
     int userEntry;
 
-    title();
+    if(first == 1)
+        title();
 
     while(!inputCheck(userEntry)) {         // Validating user's entry from the Select[] array to see if it's an available choice
         for(unsigned int i = 0; i < p1.Options.size(); i++)

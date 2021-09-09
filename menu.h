@@ -14,7 +14,7 @@ class gameMenu {
     Properties p1;
 public:
     gameMenu();
-    int Interface();
+    int Interface(bool);
     void title();
     bool inputCheck(int);
     void saveGame(gameBoard);
