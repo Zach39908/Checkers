@@ -17,8 +17,8 @@ public:
     void setQueen();
     void setupTurn();
     bool validMove();
-    bool validPiece(char,int);
     bool winner();
+    int validPiece(char,int);
     ~player();
 };
 

@@ -10,56 +10,57 @@
 
 using namespace std;
 
-const int ROWS = 8, COLS = 8, BOX_WIDTH = 14, ROW_AMOUNT = 5;   // ROW_AMOUNT is the amount of "row" strings per-"boardRow.".      
+const int ROWS = 8, COLS = 8, BOX_WIDTH = 14, ROW_AMOUNT = 5;   
 
 class gameBoard {
     vector<vector<string>> board;
     vector<string> boardRow;     
-    string row1, row2, row3, row4, row5;    // Each row string is one individual row of the larger hierarchy vector "boardRow."
+    string row1, row2, row3, row4, row5;    
 
-    vector<string> eBox = {                // eBox = emptyBox       - Different types of game pieces
+    vector<string> emptyBox = {                    
         "|~~~~~~~~~~~~|",
         "|            |",
         "|            |",
         "|            |",
         "|~~~~~~~~~~~~|"
     };
-    vector<string> cBox = {                // cBox = colorBox
+    vector<string> filledBox = {                
         "|~~~~~~~~~~~~|",
         "|------------|",
         "|------------|",
         "|------------|",
         "|~~~~~~~~~~~~|"
     };
-    vector<string> xBox = {                // xBox = X player's piece ('X' pieces are the AI's pieces)
+    vector<string> xBox = {                
         "|~~~~~~~~~~~~|",
         "|    \\ /     |",
         "|     x      |",
         "|    / \\     |",
         "|~~~~~~~~~~~~|"
     };
-    vector<string> oBox = {                // oBox = O player's piece ('O' pieces are the Player's pieces)
+    vector<string> oBox = {                
         "|~~~~~~~~~~~~|",
         "|    /``\\    |",
         "|   |    |   |",
         "|    \\__/    |",
         "|~~~~~~~~~~~~|"
     };
-    vector<string> xqBox = {               // xqBox = 'X' player's Queen piece (AI's queen piece)
+    vector<string> xKingBox = {               
         "|~~~~~~~~~~~~|",
-        "|    /``\\    |",
-        "| X  \\__/  X |",
-        "|       \\    |",
+        "|     | /     |",
+        "| X   |/    X |",
+        "|     | \\     |",
         "|~~~~~~~~~~~~|"
     };
-    vector<string> oqBox = {               // oqBox = 'O' player's Queen piece (Player's queen piece)
+    vector<string> oKingBox = {               
         "|~~~~~~~~~~~~|",
-        "|    /``\\    |",
-        "| O  \\__/  O |",
-        "|       \\    |",
+        "|     | /     |",
+        "| O   |/    O |",
+        "|     | \\     |",
         "|~~~~~~~~~~~~|"
     };
-public:                                     // Hierarchy = board -> boardRow -> row#
+    
+public:                                     
     gameBoard();
     void displayBoard();
     void changeBox(int, int, string);

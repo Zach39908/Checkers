@@ -19,10 +19,10 @@ int main() {
             activeMenu.saveGame(*activeBoard);
         }
         else if(path == 3) {
-            cout << "Directions coming soon..." << endl;
+            cout << "Directions coming soon..." << endl << endl;
         }
         else if(path == 4) {
-            cout << "Personal Stats coming soon..." << endl;
+            cout << "Personal Stats coming soon..." << endl << endl;
         }
         else if(path == 5) {
             cout << "Quitting Checkers..." << endl;

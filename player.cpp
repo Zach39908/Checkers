@@ -18,7 +18,7 @@ void player::setupTurn() {
     bool checkPiece = 0;
     string piece, nextSpace;
     char row, col;
-    int column;
+    int column, rowNum;
 
     currGame->displayBoard();
 
@@ -32,15 +32,17 @@ void player::setupTurn() {
             col = piece[1];
             column = (int)col - 48;
 
-            if(validPiece(row, column) == 1)
+            rowNum = validPiece(row, column);
+
+            if(rowNum != -1)
                 checkPiece = 1;
             else
-                cout << endl << endl << "Error: Invalid Piece Selection, Try Again." << endl << endl;
+                cout << endl << "Error: Invalid Piece Selection, Try Again." << endl << endl;
         }
-
-    cout << endl << endl << "Enter your next space to move to (ex. E4, E2, E7...): "; cin >> nextSpace;
-    cout << endl << endl;
     }
+
+    cout << endl << "............." << endl << endl << "Enter your next space to move to (ex. E4, E2, E7...): "; cin >> nextSpace;
+    cout << endl << endl;
 
     makeAMove();
 }
@@ -53,7 +55,7 @@ bool player::validMove() {
     return 0;
 }
 
-bool player::validPiece(char row, int column) {
+int player::validPiece(char row, int column) {
     string rowSegment;
     char letters[] = {'a','b','c','d','e','f','g','h'};
     bool loopControl = 0;
@@ -71,15 +73,15 @@ bool player::validPiece(char row, int column) {
     }
 
     if(rowNum == -1)
-        return 0;
+        return -1;
 
     rowIndex = (column - 1) * BOX_WIDTH;
     rowSegment = currGame->board[rowNum][2].substr(rowIndex, 14);
 
-    if(rowSegment == currGame->oBox[2] || rowSegment == currGame->oqBox[2])
-        return 1;
+    if(rowSegment == currGame->oBox[2] || rowSegment == currGame->oKingBox[2])
+        return rowNum;
     else 
-        return 0;
+        return -1;
 }
 
 User::User(shared_ptr<gameBoard> current) : player(current) {}
