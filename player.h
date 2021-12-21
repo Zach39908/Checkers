@@ -2,7 +2,6 @@
 #define H_PLAYER
 
 #include<memory>
-
 #include "board.h"
 
 using namespace std;
