@@ -89,7 +89,7 @@ void gameBoard::displayBoard() {
 
 // changeBox() CHANGES ONE BOX IN THE BOARD
 // 3 parameters:
-// (int row, int column, string boxType
+// int row, int column, string boxType
 void gameBoard::changeBox(int row, int column, string boxType) {   
     int rangeC = (column-1) * (BOX_WIDTH), indexR = (row-1);        // rangeC finds the starting index in boardRow vector at the column parameter
 

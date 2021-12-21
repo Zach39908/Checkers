@@ -2,6 +2,7 @@
 #define H_PLAYER
 
 #include<memory>
+#include<ctype.h>
 #include "board.h"
 
 using namespace std;
@@ -18,6 +19,7 @@ public:
     bool validMove();
     bool winner();
     int validPiece(char,int);
+    int checkNextBox(int&,int&,string);
     ~player();
 };
 
